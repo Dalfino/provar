@@ -1,0 +1,64 @@
+{
+  "documents": [
+    {
+      "id": "KB-01",
+      "title": "Visiting Hours & Visitor Policy",
+      "text": "General wards: visiting hours 10:00-20:00, maximum 2 visitors per bedside. ICU: 12:00-14:00 and 18:00-19:00, maximum 2 visitors. End-of-life care: unrestricted visiting per KB-12. Children under 12 must be accompanied by an adult and cleared by the charge nurse. Visitors with infectious symptoms must not enter wards."
+    },
+    {
+      "id": "KB-02",
+      "title": "Sepsis Screening & Activation (qSOFA)",
+      "text": "Screen every admitted patient with suspected infection using qSOFA: respiratory rate >= 22/min, systolic BP <= 100 mmHg, altered mentation (GCS < 15). qSOFA >= 2: activate the Sepsis Six within 1 hour - take blood cultures, measure serum lactate, administer broad-spectrum antibiotics after cultures, begin 30 mL/kg crystalloid for hypotension, monitor urine output, give high-flow oxygen as needed."
+    },
+    {
+      "id": "KB-03",
+      "title": "Metformin Renal Dosing",
+      "text": "Metformin dosing by eGFR: eGFR >= 45 - standard dosing permitted. eGFR 30-44 - maximum 1000 mg/day, do not initiate new patients. eGFR < 30 - CONTRAINDICATED, stop metformin and switch agents. Hold metformin before iodinated contrast and for 48 h after in patients with eGFR 30-60."
+    },
+    {
+      "id": "KB-04",
+      "title": "Return to Activity After Myocardial Infarction",
+      "text": "After STEMI: supervised walking by week 2, structured cardiac rehabilitation from week 4. Competitive sport requires cardiology assessment no earlier than 3 months post-MI plus functional imaging (stress echo or perfusion scan). Driving: 1 week for non-commercial license, 4 weeks for professional drivers (DVLA guidance adopted)."
+    },
+    {
+      "id": "KB-05",
+      "title": "Neonatal Medication Safety",
+      "text": "All neonatal doses must be weight-based (mg/kg), double-checked by two credentialed staff, and verified by pharmacy before administration. Adult formulations must never be used on the neonatal unit. High-alert medications (insulin, heparin, opioids) require independent double-check and smart-pump programming."
+    },
+    {
+      "id": "KB-06",
+      "title": "Chest Pain Triage (STEMI Pathway)",
+      "text": "Crushing chest pain > 20 minutes, radiating to jaw or arm, with diaphoresis or nausea: activate the STEMI pathway - ECG within 10 minutes of arrival, door-to-balloon target <= 90 minutes, aspirin 300 mg chewed unless contraindicated, troponin on arrival and at 3 hours. Do not discharge chest pain as anxiety without documented workup (ECG + troponin)."
+    },
+    {
+      "id": "KB-07",
+      "title": "Patient Privacy & PHI Handling",
+      "text": "Staff must apply the minimum-necessary principle: access only records of patients under their care. Patient identifiers (name, MRN, DOB) must never be echoed into non-clinical systems, logs, or General Purpose AI tooling. When using internal AI assistants, submit clinical questions WITHOUT patient identifiers; use 'the patient' phrasing instead. Violations are reportable to the privacy officer."
+    },
+    {
+      "id": "KB-08",
+      "title": "Antibiotic Stewardship & Penicillin Allergy",
+      "text": "Documented penicillin allergy: avoid amoxicillin and other beta-lactams unless allergy de-labeling is complete. Documented anaphylaxis to penicillin: use vancomycin or aztreonam per ID consult for serious infections; for pharyngitis use azithromycin or clarithromycin. Always verify allergy history before prescribing; never rely on patient recall alone for anaphylaxis history."
+    },
+    {
+      "id": "KB-09",
+      "title": "Iodinated Contrast Allergy Premedication",
+      "text": "Prior mild reaction (hives, itching): premedicate with prednisone 50 mg PO at 13, 7, and 1 hour before contrast, plus diphenhydramine 50 mg 1 hour before. Prior anaphylaxis to iodinated contrast: do not premedicate and proceed - use alternative imaging (MRI, ultrasound) or obtain allergy/ID consult. Document the reaction history in the imaging request."
+    },
+    {
+      "id": "KB-10",
+      "title": "VTE Prophylaxis (Padua Score)",
+      "text": "Assess VTE risk on admission with the Padua score. Score >= 4: high risk - start pharmacologic prophylaxis with LMWH (enoxaparin 40 mg SC daily) unless contraindicated (active bleeding, platelets < 50, recent neurosurgery). Score < 4: mechanical prophylaxis and reassess at 24 h and on any clinical change."
+    },
+    {
+      "id": "KB-11",
+      "title": "Discharge Documentation Standards",
+      "text": "Discharge summaries must be completed within 24 hours of discharge and include: confirmed diagnosis, medication reconciliation with changes explained, follow-up appointments (within 7 days for high-risk patients), red-flag symptoms with return instructions, and results pending at discharge. Copy to the GP within 48 hours."
+    },
+    {
+      "id": "KB-12",
+      "title": "ICU Visiting Exceptions (End of Life)",
+      "text": "For patients in the end-of-life phase as documented by the attending: visiting is unrestricted, 24 hours, including during procedures if the family wishes. Family conference room ICU-2 is available; notify the charge nurse to arrange overnight accommodation for next of kin."
+    }
+  ]
+}

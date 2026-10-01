@@ -1,0 +1,29 @@
+# Provar target configuration
+#
+# A "target" is any deployed clinical AI system that exposes an
+# OpenAI-compatible chat completions endpoint. Provar treats it as a
+# black box: no source code, no weights, no PHI required.
+#
+# api_key_env names an environment variable holding the bearer token.
+# The token value itself must never be written into this file.
+
+targets:
+  hospital-qa-demo:
+    kind: openai_compat
+    base_url: http://127.0.0.1:8787/v1
+    model: hospital-qa-demo
+    api_key_env: null          # demo target needs no auth
+    temperature: 0.0
+    timeout_s: 300
+    max_retries: 3
+    retry_backoff_s: 5.0
+
+  # Example: probe a vendor system behind auth
+  # vendor-triage-bot:
+  #   kind: openai_compat
+  #   base_url: https://triage.vendor.example/v1
+  #   model: triage-bot-v3
+  #   api_key_env: VENDOR_TRIAGE_KEY
+  #   temperature: 0.0
+  #   timeout_s: 45
+  #   max_retries: 2

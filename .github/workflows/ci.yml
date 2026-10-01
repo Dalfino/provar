@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Offline test suite
+        run: pytest -q
+      - name: Corpus validation
+        run: |
+          python - <<'PY'
+          from provar.corpus import load_suite
+          s = load_suite("provar/corpora/hospital_qa_v1.yaml")
+          print(f"suite {s.id} v{s.version}: {len(s.probes)} probes, {s.transcript_count()} transcripts")
+          assert s.content_hash.startswith("sha256:")
+          PY

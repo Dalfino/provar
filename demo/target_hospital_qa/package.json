@@ -1,0 +1,14 @@
+{
+  "name": "target_hospital_qa",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Demo target: hospital clinical-QA service (OpenAI-compatible) for Provar Evidence Pack 001",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "z-ai-web-dev-sdk": "latest"
+  }
+}

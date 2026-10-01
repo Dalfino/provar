@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# Local evidence runs (committed demo packs live under demo/evidence_pack_001/)
+/evidence/
+
+# Node (demo target)
+node_modules/
+demo/target_hospital_qa/package-lock.json
+
+# Secrets / local config — never commit
+.env
+.env.*
+*.local
+*_secret*
+
+# OS
+.DS_Store
