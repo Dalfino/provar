@@ -66,7 +66,7 @@ def cmd_run(args) -> int:
         "ended_utc": ended,
         "concurrency": args.concurrency,
         "judge_policy": "deterministic only",
-        "judge_version": "v0.1",
+        "judge_version": "v0.1.1",
     }
     pack = build_pack(args.pack_id, suite, target_meta, outcomes, scorecard, postmortem, run_meta)
     paths = write_pack_outputs(pack, args.out)
