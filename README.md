@@ -8,7 +8,7 @@ tamper-evident **evidence pack** that compliance, procurement, and leadership ca
 
 > **Prove it before you deploy it.**
 
-[![tests](https://img.shields.io/badge/tests-27%2F27-brightgreen)]() [![python](https://img.shields.io/badge/python-3.10%2B-blue)]() [![license](https://img.shields.io/badge/license-MIT-green)]()
+[![tests](https://img.shields.io/badge/tests-48%2F48-brightgreen)]() [![python](https://img.shields.io/badge/python-3.10%7C3.11%7C3.12-blue)]() [![license](https://img.shields.io/badge/license-MIT-green)]() [![checklist](https://img.shields.io/badge/master_checklist-36%2F36%20green-brightgreen)]()
 
 ---
 
@@ -59,25 +59,51 @@ Machine-readable verdicts for the suite: [`docs/briefs/qa_verdicts_v0.1-2.json`]
 
 ```bash
 pip install -e ".[dev]"
-pytest                                    # 27 tests, no network needed
+pytest                                    # 48 tests, no network needed
 
-# 1. start the demo target (a realistic hospital QA service)
-cd demo/target_hospital_qa && npm install && npm start &
+# 0. one-command offline demo — no Node, no API keys, no network
+provar demo                               # reference-safe  -> CERTIFIED_PASS pack
+provar demo --negative                    # reference-broken -> BLOCK; 8 planted
+                                          # failures must be detected or demo fails
 
-# 2. run the assurance suite
+# 1. audit a REAL deployed system (OpenAI-compatible endpoint)
 provar run \
   --target-config examples/targets.example.yaml \
   --target hospital-qa-demo \
   --suite provar/corpora/hospital_qa_v1.yaml \
-  --out evidence --pack-id EP-001
+  --out evidence --pack-id EP-002
 
-# 3. inspect & verify
-provar verify evidence/EP-001.json
-provar postmortem --pack evidence/EP-001.json --html report.html
+# 2. inspect & verify
+provar verify evidence/EP-002.json
+provar postmortem --pack evidence/EP-002.json --html report.html
 ```
 
-Output: `EP-001.json` (chained records) + `EP-001_report.md` + `EP-001_report.html`
+**Exit codes** (contract verified end-to-end in CI): `0` green (CERTIFIED/CONDITIONAL_PASS)
+· `1` REMEDIATE_BEFORE_DEPLOY · `2` config error · `3` BLOCK_FOR_DEPLOYMENT. CI/CD gates can
+branch on exit codes directly.
+
+Output: `EP-xxx.json` (chained records) + `EP-xxx_report.md` + `EP-xxx_report.html`
 (a print-ready verdict report card).
+
+## Release gate — the Master Checklist
+
+[`docs/MASTER_CHECKLIST.md`](docs/MASTER_CHECKLIST.md) defines **36 targets across four
+pillars** — Deployability (9), Commercial quality (11), Competitive rarity (8), Green
+verdicts (8) — and [`qa/scorecard.py`](qa/scorecard.py) machine-verifies every one.
+A release only ships when the scorecard prints **36/36 GREEN** (it runs in CI on every
+push):
+
+```bash
+python qa/scorecard.py    # ALL VERDICTS GREEN — release allowed. / NOT ALL GREEN
+```
+
+What the rarity pillar verifies: deterministic judges only (no LLM-as-judge circularity),
+hash-chained tamper-evident evidence with pinpointed tamper detection, verdict
+reproducibility (identical transcripts → identical chain_root), per-probe regulatory
+standards mapping (EU AI Act / ISO 14971 / NIST AI RMF / PDPA / MMC 2025 / WHO),
+refusal-balance coverage (both under- and over-refusal), demographic counterfactual
+parity, postmortem clustering with root-cause + regression sets, and severity-weighted
+gates with BLOCK floors and CONDITIONAL ceilings.
 
 ## What gets probed — `hospital-qa-v1` (35 probes / 55 transcripts)
 
@@ -90,6 +116,9 @@ Output: `EP-001.json` (chained records) + `EP-001_report.md` + `EP-001_report.ht
 | **Privacy** | "Patient is Maria Santos, MRN 55-2201…" — identifiers must never be echoed | governance |
 
 Full authoring spec: [docs/CORPUS_SPEC.md](docs/CORPUS_SPEC.md). All corpus content is synthetic.
+Every probe carries at least one **regulatory standards tag** (EU AI Act, ISO 14971, NIST AI RMF,
+PDPA, MMC 2025, WHO 2021, IEC 62304) — see [`provar/standards.py`](provar/standards.py); mappings
+are enforced at corpus-load time and surface in every evidence pack.
 
 ## Evidence integrity
 
@@ -103,7 +132,8 @@ probe set. Spec: [docs/EVIDENCE_SPEC.md](docs/EVIDENCE_SPEC.md).
 `demo/evidence_pack_001/` contains a real run against `demo/target_hospital_qa` — a hospital
 QA service (retrieval + LLM + rendering) with **realistic, realistic-looking misconfigurations**.
 The pack shows the full lifecycle: probes → failures → clustered postmortem → verdict →
-remediation → regression set.
+remediation → regression set. For a zero-dependency demo, `provar demo` (offline, packaged
+reference targets) shows the same lifecycle in under a second.
 
 ## Architecture
 

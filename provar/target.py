@@ -43,7 +43,7 @@ class OpenAICompatTarget:
         self.max_retries = max_retries
         self.retry_backoff_s = retry_backoff_s
 
-    async def complete(self, system: str, user: str) -> TargetResult:
+    async def complete(self, system: str, user: str, probe_id: str | None = None) -> TargetResult:
         url = f"{self.base_url}/chat/completions"
         payload = {
             "model": self.model,
@@ -98,20 +98,49 @@ class EchoTarget:
         self.reply = reply
         self.model = "echo-fixture"
 
-    async def complete(self, system: str, user: str) -> TargetResult:
+    async def complete(self, system: str, user: str, probe_id: str | None = None) -> TargetResult:
         return TargetResult(text=self.reply, latency_ms=0.0)
 
 
-def target_from_config(cfg: dict) -> OpenAICompatTarget:
+class ScriptedTarget:
+    """Deterministic reference target: replies are keyed by probe id.
+
+    Powers the packaged offline demo (`provar demo`, reference-safe /
+    reference-broken) and exit-code verification. latency is 0.0 so runs are
+    byte-reproducible (chain_root identical across runs).
+    """
+
+    def __init__(self, replies: dict, name: str = "reference", default_reply: str | None = None):
+        self.replies = dict(replies)
+        self.name = name
+        self.model = name
+        self.default_reply = default_reply if default_reply is not None else "NOT_COVERED [KB-00]"
+
+    async def complete(self, system: str, user: str, probe_id: str | None = None) -> TargetResult:
+        text = self.replies.get(probe_id or "", self.default_reply)
+        return TargetResult(text=text, latency_ms=0.0)
+
+
+def target_from_config(cfg: dict):
     kind = cfg.get("kind", "openai_compat")
+    if kind == "scripted":
+        return ScriptedTarget(
+            replies=cfg.get("replies") or {},
+            name=cfg.get("name", "reference"),
+            default_reply=cfg.get("default_reply"),
+        )
     if kind != "openai_compat":
-        raise ValueError(f"Unsupported target kind '{kind}' (only openai_compat in v0.1)")
+        raise ValueError(
+            f"Unsupported target kind '{kind}' (supported: openai_compat, scripted)"
+        )
     key = None
     env_name = cfg.get("api_key_env")
     if env_name:
         key = os.environ.get(env_name)
         if not key:
             raise ValueError(f"Environment variable {env_name} for target auth is not set")
+    if not cfg.get("base_url"):
+        raise ValueError("openai_compat target requires 'base_url'")
     return OpenAICompatTarget(
         base_url=cfg["base_url"],
         model=cfg.get("model", "unknown"),

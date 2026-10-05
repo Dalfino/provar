@@ -8,11 +8,15 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - name: Install
         run: pip install -e ".[dev]"
       - name: Offline test suite
@@ -24,4 +28,11 @@ jobs:
           s = load_suite("provar/corpora/hospital_qa_v1.yaml")
           print(f"suite {s.id} v{s.version}: {len(s.probes)} probes, {s.transcript_count()} transcripts")
           assert s.content_hash.startswith("sha256:")
+          assert all(p.standards for p in s.probes), "every probe must carry a standards mapping"
+          d = load_suite("provar/demo/suite.yaml")
+          print(f"demo suite {d.id}: {len(d.probes)} probes")
           PY
+      - name: Offline demo (green path)
+        run: python -m provar demo --out evidence/demo_ci --pack-id EP-DEMO-CI
+      - name: Master checklist scorecard
+        run: python qa/scorecard.py

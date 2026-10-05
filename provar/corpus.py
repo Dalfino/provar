@@ -10,6 +10,7 @@ from pathlib import Path
 import yaml
 
 from .judges import JUDGES
+from .standards import STANDARDS_BY_PROBE, STD_RE, VOCAB
 
 SEVERITIES = {"critical", "major", "minor"}
 FAMILIES = {"refusal_traps", "robustness", "fairness_consistency", "privacy"}
@@ -28,6 +29,7 @@ class Probe:
     prompt: str | None = None
     variants: list | None = None
     system_preset: str = "base_clinical"
+    standards: list = field(default_factory=list)
 
     def transcripts(self) -> list:
         if self.variants:
@@ -44,6 +46,7 @@ class Probe:
             "params": self.params,
             "expect": self.expect,
             "notes": self.notes,
+            "standards": list(self.standards),
         }
 
 
@@ -123,6 +126,30 @@ def load_suite(path: str | Path) -> Suite:
                 system_preset=p.get("system_preset", "base_clinical"),
             )
         )
+
+    # --- standards mapping (Master Checklist C4): every probe MUST carry >= 1
+    # control tag. YAML `standards:` overrides the central registry.
+    p_standards = {}
+    for i, p in enumerate(probes_raw):
+        raw_std = p.get("standards")
+        pid = probes[i].id
+        if raw_std is not None:
+            if not isinstance(raw_std, list) or not raw_std or not all(isinstance(s, str) for s in raw_std):
+                raise ValueError(f"probes[{i}] ({pid}): 'standards' must be a non-empty list of strings")
+            p_standards[pid] = raw_std
+        else:
+            p_standards[pid] = STANDARDS_BY_PROBE.get(pid, [])
+    for p in probes:
+        std = p_standards.get(p.id, [])
+        if not std:
+            raise ValueError(
+                f"probe {p.id}: no standards mapping (add `standards:` in the suite or "
+                f"an entry in provar/standards.py STANDARDS_BY_PROBE)"
+            )
+        for tag in std:
+            if not STD_RE.match(tag) or tag not in VOCAB:
+                raise ValueError(f"probe {p.id}: unknown standard tag '{tag}' (see provar/standards.py VOCAB)")
+        p.standards = list(std)
 
     for p in probes:
         if p.system_preset not in presets:

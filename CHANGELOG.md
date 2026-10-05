@@ -3,6 +3,38 @@
 All notable changes to Provar are documented here. Format: Keep a Changelog 1.1;
 SemVer for the package and the pack format (`provar.evidence/x.y`).
 
+## [0.3.0] — 2026-10-05
+
+### Added
+- Master Checklist: `docs/MASTER_CHECKLIST.md` — 36 release-gate targets across four pillars
+  (Deployability / Commercial quality / Competitive rarity / Green verdicts), each with a
+  machine verification instrument.
+- QA scorecard: `qa/scorecard.py` — machine-verifies all 36 items; exit 0 only when every
+  verdict is GREEN. Wired into CI as a release gate.
+- Offline one-command demo: `provar demo` runs a packaged 9-probe demo suite against the
+  `reference-safe` target (CERTIFIED_PASS, no network, no Node, no API keys).
+- Negative demo: `provar demo --negative` runs the `reference-broken` target — 8 planted
+  failures across all five dimensions must be detected (BLOCK_FOR_DEPLOYMENT) or the demo
+  fails. Proves the verdict engine is not a rubber stamp.
+- Scripted reference targets (`kind: scripted`) + `ScriptedTarget`: deterministic replies
+  keyed by probe id; latency 0.0 for byte-reproducible runs.
+- Per-probe regulatory standards mapping (`provar/standards.py` + validation in the corpus
+  loader): EU AI Act, ISO 14971, NIST AI RMF, PDPA (MY), MMC 2025 (MY), WHO 2021, IEC 62304.
+  100% of probes carry >= 1 control tag; mappings surface in evidence records and reports.
+- Exit-code contract: 0 green/conditional, 1 remediate, 3 block, 2 config error — verified
+  end-to-end by tests and the scorecard (A7).
+- Dockerfile (entrypoint `provar`, default `demo`) + `.dockerignore`; `py.typed` shipped;
+  package-data for corpora and demo suite; `python -m provar` entry point.
+
+### Fixed
+- CI trigger YAML corruption (`branches: ain]` -> `branches: [main]`) and CI matrix now
+  Python 3.10 / 3.11 / 3.12; CI additionally runs the offline demo + scorecard.
+- CLI config errors now exit 2 cleanly (no traceback crash on missing/bad target config).
+
+### Verified
+- 48/48 offline tests pass (was 27); scorecard 36/36 GREEN; reproducibility: identical
+  transcripts produce identical chain_root.
+
 ## [0.2.0] — 2026-10-05
 
 ### Added

@@ -61,6 +61,7 @@ class ProbeOutcome:
             "verdict": self.verdict,
             "detail": self.detail,
             "findings": self.findings,
+            "standards": list(self.probe.standards),
             "latency_ms_total": round(self.latency_ms_total, 1),
             "transcripts": [
                 {
@@ -78,7 +79,7 @@ async def _run_probe(probe: Probe, system: str, target, sem: asyncio.Semaphore) 
     async with sem:
         transcripts: list = []
         for user_prompt in probe.transcripts():
-            result = await target.complete(system, user_prompt)
+            result = await target.complete(system, user_prompt, probe_id=probe.id)
             transcripts.append(
                 Transcript(
                     prompt=user_prompt,

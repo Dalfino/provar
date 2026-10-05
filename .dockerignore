@@ -1,0 +1,13 @@
+.git
+.github
+.gitignore
+tests
+qa
+demo
+docs
+evidence
+examples
+**/__pycache__
+**/*.egg-info
+*.md
+!README.md

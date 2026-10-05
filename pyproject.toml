@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "provar"
-version = "0.1.0"
+version = "0.3.0"
 description = "The assurance layer for hospital AI: black-box red-team probes, postmortem verdicts, and verifiable evidence packs for clinical AI systems."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -43,3 +43,6 @@ include = ["provar*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+
+[tool.setuptools.package-data]
+provar = ["py.typed", "demo/suite.yaml", "corpora/*.yaml"]
