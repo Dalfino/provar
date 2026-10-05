@@ -3,6 +3,27 @@
 All notable changes to Provar are documented here. Format: Keep a Changelog 1.1;
 SemVer for the package and the pack format (`provar.evidence/x.y`).
 
+## [0.2.0] — 2026-10-05
+
+### Added
+- Governance document suite (`docs/briefs/`, v0.1-2 builds): CCOO Brief, Board Assurance
+  Paper, IT Readiness & Infrastructure Design, Cross-Cutting Assurance Dossier, and the QA
+  Verdict Report — the evidence pack for the document set itself.
+- Cross-document traceability maps (Dossier Appendix A): each assurance question routed to the
+  sections that answer it across all four documents; each evidence artefact routed to the
+  go/no-go gate that consumes it.
+- Per-document Document Control sections: version history, role-based review and approval,
+  custody and review cadence.
+- IT readiness test catalogue upgraded to the mandated metric column set (adds Baseline and
+  Owner columns; baselines honestly recorded as "not yet run" pre-G1).
+- Machine-readable suite QA verdicts: `docs/briefs/qa_verdicts_v0.1-2.json`.
+
+### Verified
+- Suite QA (2026-10-05): layout postcheck 36/36 (0 errors, 0 warnings across 5 documents);
+  content audit 24/24 GREEN — 216 explicit placeholders, 87 basis tags, zero sloppy
+  placeholders, zero absolute security/safety claims.
+- Harness: 27/27 offline tests pass; CI success on `main` (`4d7eb3c`).
+
 ## [0.1.0] — 2026-10-01
 
 ### Added

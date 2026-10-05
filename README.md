@@ -8,7 +8,7 @@ tamper-evident **evidence pack** that compliance, procurement, and leadership ca
 
 > **Prove it before you deploy it.**
 
-[![tests](https://img.shields.io/badge/tests-25%2F25-brightgreen)]() [![python](https://img.shields.io/badge/python-3.10%2B-blue)]() [![license](https://img.shields.io/badge/license-MIT-green)]()
+[![tests](https://img.shields.io/badge/tests-27%2F27-brightgreen)]() [![python](https://img.shields.io/badge/python-3.10%2B-blue)]() [![license](https://img.shields.io/badge/license-MIT-green)]()
 
 ---
 
@@ -37,11 +37,29 @@ Provar audits that composed system, as a black box:
 
 Grades A–F per dimension: **safety · refusal_calibration · robustness · fairness · governance**.
 
+## The governance document suite (v0.2 — verified green)
+
+Verdicts only matter if governance can act on them. Provar ships an audience-layered assurance
+document set that turns pack results into board-, clinical- and IT-level artefacts. All
+verification verdicts are green: **36/36 layout postchecks, 24/24 content-audit checks**
+(see the QA Verdict Report below). Hospital-specific facts appear only as `[placeholders]`;
+every claim carries a basis tag (`[Standard]` / `[Best practice]` / `[Local Assumption]`).
+
+| Document | Audience | Contents |
+|---|---|---|
+| [`docs/briefs/Provar_CCOO_Brief.docx`](docs/briefs/Provar_CCOO_Brief.docx) | Chief Clinical Operations Officer | Workflow impact, safety hazards & mitigations, 15 quantifiable tests, 10-tile dashboard, early-warning signs, 30/60/90-day decisions |
+| [`docs/briefs/Provar_Board_Assurance_Paper.docx`](docs/briefs/Provar_Board_Assurance_Paper.docx) | The Board | Governance & RACI, 12 board metrics with red thresholds, 10 challenge questions, G0–G4 go/no-go gates with automatic stop rules |
+| [`docs/briefs/Provar_IT_Readiness_Design.docx`](docs/briefs/Provar_IT_Readiness_Design.docx) | IT & Security | 6-layer reference architecture, 5-zone network + firewall matrix, integration inventory, STRIDE mapping, backup/DR, endpoints, monitoring, 14-test catalogue, readiness declaration |
+| [`docs/briefs/Provar_Cross_Cutting_Dossier.docx`](docs/briefs/Provar_Cross_Cutting_Dossier.docx) | Programme leadership | Master metrics catalogue, go/no-go detail, six-lens hospital impact, 22-topic debate FAQ, SWOT, 24-risk register, traceability maps, self-audit |
+| [`docs/briefs/Provar_QA_Verdict_Report.docx`](docs/briefs/Provar_QA_Verdict_Report.docx) | Document reviewers | The evidence pack for the document set itself — what was checked, with what verdict |
+
+Machine-readable verdicts for the suite: [`docs/briefs/qa_verdicts_v0.1-2.json`](docs/briefs/qa_verdicts_v0.1-2.json).
+
 ## Quickstart
 
 ```bash
 pip install -e ".[dev]"
-pytest                                    # 25 tests, no network needed
+pytest                                    # 27 tests, no network needed
 
 # 1. start the demo target (a realistic hospital QA service)
 cd demo/target_hospital_qa && npm install && npm start &

@@ -1,0 +1,145 @@
+{
+  "documents": {
+    "Provar_CCOO_Brief.docx": {
+      "title": "CCOO Brief",
+      "headings": 14,
+      "tables": 10,
+      "words": 4569,
+      "checks": {
+        "V1_placeholders": {
+          "verdict": "GREEN",
+          "detail": "68 explicit placeholder fields found"
+        },
+        "V2_basis_tags": {
+          "verdict": "GREEN",
+          "detail": "13 basis tags ([Standard]/[Best practice]/[Local Assumption]) found"
+        },
+        "V3_no_sloppy_placeholders": {
+          "verdict": "GREEN",
+          "detail": "none found"
+        },
+        "V4_no_absolute_claims": {
+          "verdict": "GREEN",
+          "detail": "no absolute security/safety claims"
+        },
+        "V5_required_sections": {
+          "verdict": "GREEN",
+          "detail": "all present"
+        },
+        "V6_metric_table_columns": {
+          "verdict": "GREEN",
+          "detail": "Baseline/Target/Measurement method columns present"
+        }
+      },
+      "verdict": "GREEN",
+      "score": "6/6"
+    },
+    "Provar_Board_Assurance_Paper.docx": {
+      "title": "Board Assurance Paper",
+      "headings": 18,
+      "tables": 9,
+      "words": 4094,
+      "checks": {
+        "V1_placeholders": {
+          "verdict": "GREEN",
+          "detail": "35 explicit placeholder fields found"
+        },
+        "V2_basis_tags": {
+          "verdict": "GREEN",
+          "detail": "15 basis tags ([Standard]/[Best practice]/[Local Assumption]) found"
+        },
+        "V3_no_sloppy_placeholders": {
+          "verdict": "GREEN",
+          "detail": "none found"
+        },
+        "V4_no_absolute_claims": {
+          "verdict": "GREEN",
+          "detail": "no absolute security/safety claims"
+        },
+        "V5_required_sections": {
+          "verdict": "GREEN",
+          "detail": "all present"
+        },
+        "V6_metric_table_columns": {
+          "verdict": "GREEN",
+          "detail": "Baseline/Target/Measurement method columns present"
+        }
+      },
+      "verdict": "GREEN",
+      "score": "6/6"
+    },
+    "Provar_IT_Readiness_Design.docx": {
+      "title": "IT Readiness & Infrastructure Design",
+      "headings": 28,
+      "tables": 16,
+      "words": 5514,
+      "checks": {
+        "V1_placeholders": {
+          "verdict": "GREEN",
+          "detail": "39 explicit placeholder fields found"
+        },
+        "V2_basis_tags": {
+          "verdict": "GREEN",
+          "detail": "37 basis tags ([Standard]/[Best practice]/[Local Assumption]) found"
+        },
+        "V3_no_sloppy_placeholders": {
+          "verdict": "GREEN",
+          "detail": "none found"
+        },
+        "V4_no_absolute_claims": {
+          "verdict": "GREEN",
+          "detail": "no absolute security/safety claims"
+        },
+        "V5_required_sections": {
+          "verdict": "GREEN",
+          "detail": "all present"
+        },
+        "V6_metric_table_columns": {
+          "verdict": "GREEN",
+          "detail": "Baseline/Target/Measurement method columns present"
+        }
+      },
+      "verdict": "GREEN",
+      "score": "6/6"
+    },
+    "Provar_Cross_Cutting_Dossier.docx": {
+      "title": "Cross-Cutting Assurance Dossier",
+      "headings": 50,
+      "tables": 14,
+      "words": 13410,
+      "checks": {
+        "V1_placeholders": {
+          "verdict": "GREEN",
+          "detail": "75 explicit placeholder fields found"
+        },
+        "V2_basis_tags": {
+          "verdict": "GREEN",
+          "detail": "22 basis tags ([Standard]/[Best practice]/[Local Assumption]) found"
+        },
+        "V3_no_sloppy_placeholders": {
+          "verdict": "GREEN",
+          "detail": "none found"
+        },
+        "V4_no_absolute_claims": {
+          "verdict": "GREEN",
+          "detail": "no absolute security/safety claims"
+        },
+        "V5_required_sections": {
+          "verdict": "GREEN",
+          "detail": "all present"
+        },
+        "V6_metric_table_columns": {
+          "verdict": "GREEN",
+          "detail": "Baseline/Target/Measurement method columns present"
+        }
+      },
+      "verdict": "GREEN",
+      "score": "6/6"
+    }
+  },
+  "overall": {
+    "checks": 24,
+    "passed": 24,
+    "verdict": "GREEN"
+  }
+}
